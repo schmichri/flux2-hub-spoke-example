@@ -12,7 +12,7 @@ validate: # Validate the Flux manifests
 	scripts/validate.sh
 
 .PHONY: fleet-up
-fleet-up: # Start local Kind clusters (flux-hub, flux-staging and flux-production)
+fleet-up: # Start local Kind clusters (flux-hub, flux-staging, flux-test and flux-production)
 	scripts/fleet-up.sh
 
 .PHONY: fleet-down

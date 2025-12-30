@@ -32,6 +32,13 @@ kind create cluster --name "${CLUSTER_STAGING}" \
 --image "kindest/node:${CLUSTER_VERSION}" \
 --wait 5m
 
+CLUSTER_TEST="flux-test"
+echo "INFO - Creating cluster ${CLUSTER_TEST}"
+
+kind create cluster --name "${CLUSTER_TEST}" \
+--image "kindest/node:${CLUSTER_VERSION}" \
+--wait 5m
+
 CLUSTER_PRODUCTION="flux-production"
 echo "INFO - Creating cluster ${CLUSTER_PRODUCTION}"
 
@@ -47,6 +54,11 @@ kind get kubeconfig --internal --name ${CLUSTER_STAGING} > "${repo_root}/bin/sta
 kubectl --context "kind-${CLUSTER_HUB}" create ns staging
 kubectl --context "kind-${CLUSTER_HUB}" create secret generic -n staging cluster-kubeconfig \
 --from-file=value="${repo_root}/bin/staging.kubeconfig"
+
+kind get kubeconfig --internal --name ${CLUSTER_TEST} > "${repo_root}/bin/test.kubeconfig"
+kubectl --context "kind-${CLUSTER_HUB}" create ns test
+kubectl --context "kind-${CLUSTER_HUB}" create secret generic -n test cluster-kubeconfig \
+--from-file=value="${repo_root}/bin/test.kubeconfig"
 
 kind get kubeconfig --internal --name ${CLUSTER_PRODUCTION} > "${repo_root}/bin/production.kubeconfig"
 kubectl --context "kind-${CLUSTER_HUB}" create ns production

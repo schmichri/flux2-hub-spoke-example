@@ -18,6 +18,11 @@ echo "INFO - Deleting cluster ${CLUSTER_STAGING}"
 
 kind delete cluster --name "${CLUSTER_STAGING}"
 
+CLUSTER_TEST="flux-test"
+echo "INFO - Deleting cluster ${CLUSTER_TEST}"
+
+kind delete cluster --name "${CLUSTER_TEST}"
+
 CLUSTER_PRODUCTION="flux-production"
 echo "INFO - Deleting cluster ${CLUSTER_PRODUCTION}"
 
