@@ -102,6 +102,9 @@ export GITHUB_REPO=<repository-name>
 Then, bootstrap Flux on the hub cluster:
 
 ```shell
+source .env
+
+echo $GITHUB_TOKEN
 flux bootstrap github \
     --context=kind-flux-hub \
     --owner=${GITHUB_USER} \
